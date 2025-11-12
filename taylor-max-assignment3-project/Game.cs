@@ -16,15 +16,14 @@ namespace MohawkGame2D
         
         
 
-        Vector2 projPos = new Vector2(0, 0);
+        Vector2 projPos = new Vector2(400, 0);
         Vector2 projVelo;
-        Vector2 projGravity = new Vector2(20, 30);
+        Vector2 projGravity = new Vector2(0, 30);
 
         Vector2 evilGrav = new Vector2(8, 0);
         Vector2 evilPos = new Vector2(0, 300);
         Vector2 evilVelo;
 
-       
 
         int projSize = 20;
 
@@ -76,13 +75,13 @@ namespace MohawkGame2D
             evilBlocks();
 
 
-            // make player movement
+            // make player movment!!
 
-            Vector2 playerSpot = new Vector2(playerMove.X, 30);
+            Vector2 playerSpot = new Vector2(playerMove.X, 0);
            
             
-                Draw.FillColor = Color.Green;
-                Draw.Rectangle(playerSpot, playerSize);
+            Draw.FillColor = Color.Green;
+            Draw.Rectangle(playerSpot, playerSize);
             
 
             float speedYay = 10;
@@ -101,15 +100,30 @@ namespace MohawkGame2D
 
             }
 
-            // make player projectiles
+            if (playerSpot.X > 800)
+            {
+                Window.ClearBackground(Color.Red);
+                Console.WriteLine("R E T U R N");
+            }
 
+            if (playerSpot.X < 0)
+            {
+                Window.ClearBackground(Color.Red);
+                Console.WriteLine("R E T U R N");
+            }
+
+            // make player projectiles emerge from player coords
+
+            projPos.X = playerSpot.X;
+
+            // make player projectiles
 
             if (Input.IsKeyboardKeyDown(KeyboardInput.Space))
             {
                 makeGravity();
                 Draw.FillColor = Color.Green;
                 Draw.Circle(projPos, projSize);
-            }
+            }   
 
             if (Input.IsKeyboardKeyReleased(KeyboardInput.Space))
             {
@@ -117,6 +131,8 @@ namespace MohawkGame2D
                 projGravity.X = 0;
                 projGravity.Y = 0;
             }
+
+            // rewind the balls
 
             if (evilPos.X > 850)
             {
@@ -154,11 +170,10 @@ namespace MohawkGame2D
 
                 evilPos.X = 0;
 
-                theCount++;
-
-                Console.WriteLine($"The SCORE!! is: {theCount}. My mother is proud of; you! !");
+                theCount++;            
             }
 
+            Text.Draw($"The SCORE!! is: {theCount}. My mother is proud of; you! !", new Vector2(0, 500));
         }
     }
 
