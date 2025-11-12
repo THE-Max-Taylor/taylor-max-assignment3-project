@@ -13,24 +13,14 @@ namespace MohawkGame2D
      
         Vector2 playerSize = new Vector2(40, 40);
         Vector2 playerMove = new Vector2(0, 0);
-        
-        
-
         Vector2 projPos = new Vector2(400, 0);
         Vector2 projVelo;
         Vector2 projGravity = new Vector2(0, 30);
 
-        Vector2 evilGrav = new Vector2(8, 0);
-        Vector2 evilPos = new Vector2(0, 300);
-        Vector2 evilVelo;
-
+        EnemyBall enemyBall = new EnemyBall();
 
         int projSize = 20;
-
-        int evilRadius = 20;
-
-     
-
+    
         //projectile gravity
         void makeGravity()
         {
@@ -38,27 +28,12 @@ namespace MohawkGame2D
             projVelo += gravityYay;
             projPos += projVelo;
         }
-
-
-
-        //bastard's phsyics
-        void SimulateCircleGrav()
-        {
-            Vector2 horizontalGrav = evilGrav * Time.DeltaTime;
-            evilVelo += horizontalGrav;
-            evilPos += evilVelo;
-        }
-
-        //make the bastards
-        void evilBlocks()
-        {
-            Draw.FillColor = Color.Red;
-            Draw.Circle(evilPos, evilRadius);
-        }
+        
+        
 
         int theCount = 0;
 
-        int evilCount = 0;
+       
 
         public void Setup()
         {
@@ -70,9 +45,7 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.White);
 
-            SimulateCircleGrav();
-
-            evilBlocks();
+            
 
 
             // make player movment!!
@@ -86,7 +59,7 @@ namespace MohawkGame2D
 
             float speedYay = 10;
 
-            bool movingGirl = false;
+          
             if (Input.IsKeyboardKeyDown(KeyboardInput.D))
                 
             {    
@@ -134,29 +107,7 @@ namespace MohawkGame2D
 
             // rewind the balls
 
-            if (evilPos.X > 850)
-            {
-                evilPos.X = 0;
-                evilGrav.X = 8;
-
-                evilCount++;
-            }
-
-            if (evilCount > 5)
-            {
-                evilGrav.X = -8;
-            }
-
-            if (evilPos.X < 0)
-            {
-                evilPos.X = 800;
-                evilCount--;
-            }
-
-            if (evilCount < -1)
-            {
-                evilGrav.X = 8;
-            }
+            
 
             float theOverlap = projSize + evilRadius;
 
