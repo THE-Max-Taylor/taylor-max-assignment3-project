@@ -15,26 +15,24 @@ namespace MohawkGame2D
         public Vector2 evilPos = new Vector2(0, 300);
         public Vector2 evilVelo;
         int evilCount = 0;
+        // make the evil balls
         public void evilBlocks()
         {
             Draw.FillColor = Color.Red;
             Draw.Circle(evilPos, evilRadius);
         }
-        void SimulateCircleGrav()
+
+        // evil ball physics
+        public void SimulateCircleGrav()
         {
             Vector2 horizontalGrav = evilGrav * Time.DeltaTime;
             evilVelo += horizontalGrav;
             evilPos += evilVelo;
         }
 
-        public void Setup() 
-        { 
-        
-        }
-        public void Update() 
+        // what to do if the evil balls spin too far
+        public void evilRotation()
         {
-            SimulateCircleGrav();
-            evilBlocks();
             if (evilPos.X > 850)
             {
                 evilPos.X = 0;

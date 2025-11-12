@@ -17,7 +17,7 @@ namespace MohawkGame2D
         Vector2 projVelo;
         Vector2 projGravity = new Vector2(0, 30);
 
-        EnemyBall enemyBall = new EnemyBall();
+        EnemyBall joeBall = new EnemyBall();  
 
         int projSize = 20;
     
@@ -27,26 +27,23 @@ namespace MohawkGame2D
             Vector2 gravityYay = projGravity * Time.DeltaTime;
             projVelo += gravityYay;
             projPos += projVelo;
-        }
+        }        
         
-        
-
         int theCount = 0;
-
-       
-
+      
         public void Setup()
         {
             Window.SetSize(800, 600);
-
         }
 
         public void Update()
-        {
+        {                     
             Window.ClearBackground(Color.White);
 
-            
-
+            // bring in info from other classes!!
+            joeBall.evilBlocks();
+            joeBall.SimulateCircleGrav();
+            joeBall.evilRotation();
 
             // make player movment!!
 
@@ -56,10 +53,8 @@ namespace MohawkGame2D
             Draw.FillColor = Color.Green;
             Draw.Rectangle(playerSpot, playerSize);
             
-
             float speedYay = 10;
-
-          
+        
             if (Input.IsKeyboardKeyDown(KeyboardInput.D))
                 
             {    
@@ -70,7 +65,6 @@ namespace MohawkGame2D
 
             {
                 playerMove.X += -speedYay;
-
             }
 
             if (playerSpot.X > 800)
@@ -104,14 +98,10 @@ namespace MohawkGame2D
                 projGravity.X = 0;
                 projGravity.Y = 0;
             }
+           
+            float theOverlap = projSize + joeBall.evilRadius;
 
-            // rewind the balls
-
-            
-
-            float theOverlap = projSize + evilRadius;
-
-            bool isOverlap = Vector2.Distance(evilPos, projPos) < theOverlap;
+            bool isOverlap = Vector2.Distance(joeBall.evilPos, projPos) < theOverlap;
 
             if (isOverlap)
             {
@@ -119,10 +109,12 @@ namespace MohawkGame2D
 
                 projPos = new Vector2(400, 0);
 
-                evilPos.X = 0;
+                joeBall.evilPos.X = 0;
 
                 theCount++;            
             }
+           
+            
 
             Text.Draw($"The SCORE!! is: {theCount}. My mother is proud of; you! !", new Vector2(0, 500));
         }
