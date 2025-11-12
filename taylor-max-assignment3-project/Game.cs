@@ -10,8 +10,13 @@ namespace MohawkGame2D
     /// </summary>
     public class Game
     {
+     
+        Vector2 playerSize = new Vector2(40, 40);
+        Vector2 playerMove = new Vector2(0, 0);
+        
+        
 
-        Vector2 projPos = new Vector2(400, 0);
+        Vector2 projPos = new Vector2(0, 0);
         Vector2 projVelo;
         Vector2 projGravity = new Vector2(20, 30);
 
@@ -19,10 +24,13 @@ namespace MohawkGame2D
         Vector2 evilPos = new Vector2(0, 300);
         Vector2 evilVelo;
 
+       
+
         int projSize = 20;
 
         int evilRadius = 20;
 
+     
 
         //projectile gravity
         void makeGravity()
@@ -31,6 +39,8 @@ namespace MohawkGame2D
             projVelo += gravityYay;
             projPos += projVelo;
         }
+
+
 
         //bastard's phsyics
         void SimulateCircleGrav()
@@ -64,6 +74,35 @@ namespace MohawkGame2D
             SimulateCircleGrav();
 
             evilBlocks();
+
+
+            // make player movement
+
+            Vector2 playerSpot = new Vector2(playerMove.X, 30);
+           
+            
+                Draw.FillColor = Color.Green;
+                Draw.Rectangle(playerSpot, playerSize);
+            
+
+            float speedYay = 10;
+
+            bool movingGirl = false;
+            if (Input.IsKeyboardKeyDown(KeyboardInput.D))
+                
+            {    
+                playerMove.X += speedYay;
+            }
+
+            if (Input.IsKeyboardKeyDown(KeyboardInput.A))
+
+            {
+                playerMove.X += -speedYay;
+
+            }
+
+            // make player projectiles
+
 
             if (Input.IsKeyboardKeyDown(KeyboardInput.Space))
             {
@@ -117,7 +156,7 @@ namespace MohawkGame2D
 
                 theCount++;
 
-                Console.WriteLine($"The SCORE!! is: {theCount}");
+                Console.WriteLine($"The SCORE!! is: {theCount}. My mother is proud of; you! !");
             }
 
         }
