@@ -24,8 +24,9 @@ namespace MohawkGame2D
         public void Setup()
         {
             Window.SetSize(800, 600);
+            Window.SetTitle("My Mother Is Proud Of You");
+            
         }
-
         public void Update()
         {                     
             Window.ClearBackground(Color.White);
@@ -43,11 +44,9 @@ namespace MohawkGame2D
         
 
             // make player projectiles emerge from player coords
-            Vector2 playerSpot = new Vector2(joePlayer.playerMove.X, 0);
+            Vector2 playerPos = new Vector2(joePlayer.playerMove.X, 0);
 
-            joeProjectiles.projPos.X = playerSpot.X;
-
-            // make player projectiles
+            joeProjectiles.projPos.X = playerPos.X;
 
             // check for projectile + enemy overlap
 

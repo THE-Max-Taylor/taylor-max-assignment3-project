@@ -9,9 +9,9 @@ namespace MohawkGame2D
 {
     public class Projectiles
     {
-        public Vector2 projPos = new Vector2(400, 0);
+        public Vector2 projPos = new Vector2(0, 0);
         public Vector2 projVelo;
-        public Vector2 projGravity = new Vector2(0, 30);
+        public Vector2 projGravity = new Vector2(0, 3);
         
         public int projSize = 20;
 

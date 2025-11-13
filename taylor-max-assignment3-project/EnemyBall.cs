@@ -15,6 +15,7 @@ namespace MohawkGame2D
         public Vector2 evilPos = new Vector2(0, 300);
         public Vector2 evilVelo;
         int evilCount = 0;
+
         // make the evil balls
         public void evilBlocks()
         {
