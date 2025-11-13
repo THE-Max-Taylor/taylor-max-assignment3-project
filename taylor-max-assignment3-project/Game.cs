@@ -9,26 +9,16 @@ namespace MohawkGame2D
     ///     Your game code goes inside this class!
     /// </summary>
     public class Game
-    {
-     
-        Vector2 playerSize = new Vector2(40, 40);
-        Vector2 playerMove = new Vector2(0, 0);
-        Vector2 projPos = new Vector2(400, 0);
-        Vector2 projVelo;
-        Vector2 projGravity = new Vector2(0, 30);
+    {          
+        
+        EnemyBall joeBall = new EnemyBall();
 
-        EnemyBall joeBall = new EnemyBall();  
+        Player joePlayer = new Player();
+
+        Projectiles joeProjectiles = new Projectiles();
 
         int projSize = 20;
-    
-        //projectile gravity
-        void makeGravity()
-        {
-            Vector2 gravityYay = projGravity * Time.DeltaTime;
-            projVelo += gravityYay;
-            projPos += projVelo;
-        }        
-        
+            
         int theCount = 0;
       
         public void Setup()
@@ -45,76 +35,36 @@ namespace MohawkGame2D
             joeBall.SimulateCircleGrav();
             joeBall.evilRotation();
 
-            // make player movment!!
+            joePlayer.playerCharacter();
+            joePlayer.playerControls();
 
-            Vector2 playerSpot = new Vector2(playerMove.X, 0);
-           
-            
-            Draw.FillColor = Color.Green;
-            Draw.Rectangle(playerSpot, playerSize);
-            
-            float speedYay = 10;
+            joeProjectiles.makeGravity();
+            joeProjectiles.projectilesYay();        
         
-            if (Input.IsKeyboardKeyDown(KeyboardInput.D))
-                
-            {    
-                playerMove.X += speedYay;
-            }
-
-            if (Input.IsKeyboardKeyDown(KeyboardInput.A))
-
-            {
-                playerMove.X += -speedYay;
-            }
-
-            if (playerSpot.X > 800)
-            {
-                Window.ClearBackground(Color.Red);
-                Console.WriteLine("R E T U R N");
-            }
-
-            if (playerSpot.X < 0)
-            {
-                Window.ClearBackground(Color.Red);
-                Console.WriteLine("R E T U R N");
-            }
 
             // make player projectiles emerge from player coords
+            Vector2 playerSpot = new Vector2(joePlayer.playerMove.X, 0);
 
-            projPos.X = playerSpot.X;
+            joeProjectiles.projPos.X = playerSpot.X;
 
             // make player projectiles
 
-            if (Input.IsKeyboardKeyDown(KeyboardInput.Space))
-            {
-                makeGravity();
-                Draw.FillColor = Color.Green;
-                Draw.Circle(projPos, projSize);
-            }   
+            // check for projectile + enemy overlap
 
-            if (Input.IsKeyboardKeyReleased(KeyboardInput.Space))
-            {
-                projPos = new Vector2(400, 0);
-                projGravity.X = 0;
-                projGravity.Y = 0;
-            }
-           
             float theOverlap = projSize + joeBall.evilRadius;
 
-            bool isOverlap = Vector2.Distance(joeBall.evilPos, projPos) < theOverlap;
+            bool isOverlap = Vector2.Distance(joeBall.evilPos, joeProjectiles.projPos) < theOverlap;
 
             if (isOverlap)
             {
                 Window.ClearBackground(Color.Yellow);
 
-                projPos = new Vector2(400, 0);
+                joeProjectiles.projPos = new Vector2(400, 0);
 
                 joeBall.evilPos.X = 0;
 
                 theCount++;            
-            }
-           
-            
+            }                      
 
             Text.Draw($"The SCORE!! is: {theCount}. My mother is proud of; you! !", new Vector2(0, 500));
         }
