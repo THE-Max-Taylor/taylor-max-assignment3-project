@@ -35,7 +35,7 @@ namespace MohawkGame2D
            
         }
 
-            
+        //makes the player controls!!            
             public void playerControls()
             {
 

@@ -17,6 +17,8 @@ namespace MohawkGame2D
 
         Projectiles joeProjectiles = new Projectiles();
 
+        TheMother[] manyMothers = new TheMother[50];
+
         int projSize = 20;
             
         int theCount = 0;
@@ -25,24 +27,36 @@ namespace MohawkGame2D
         {
             Window.SetSize(800, 600);
             Window.SetTitle("My Mother Is Proud Of You");
-            
+
+            for (int i = 0; i < manyMothers.Length; i++)
+            {
+                manyMothers[i] = new TheMother();
+                manyMothers[i].motherGuy = Random.Vector2(0, 790, 40, 190);
+            }
+
         }
         public void Update()
         {                     
             Window.ClearBackground(Color.White);
 
             // bring in info from other classes!!
-            joeBall.evilBlocks();
-            joeBall.SimulateCircleGrav();
-            joeBall.evilRotation();
+
+            for (int i = 0; i < manyMothers.Length; i++)
+            {
+                manyMothers[i].myMother();
+            }
 
             joePlayer.playerCharacter();
             joePlayer.playerControls();
 
             joeProjectiles.makeGravity();
-            joeProjectiles.projectilesYay();        
-        
+            joeProjectiles.projectilesYay();
 
+            joeBall.evilBlocks();
+
+
+          
+           
             // make player projectiles emerge from player coords
             Vector2 playerPos = new Vector2(joePlayer.playerMove.X, 0);
 
@@ -65,7 +79,7 @@ namespace MohawkGame2D
                 theCount++;            
             }                      
 
-            Text.Draw($"The SCORE!! is: {theCount}. My mother is proud of; you! !", new Vector2(0, 500));
+            Text.Draw($"The SCORE!! is: {theCount}. My mothers is proud of; you! !", new Vector2(0, 200));
         }
     }
 

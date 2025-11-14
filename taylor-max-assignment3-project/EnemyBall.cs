@@ -10,9 +10,9 @@ namespace MohawkGame2D
 {
     public class EnemyBall
     {
-        public int evilRadius = 20;
+        public int evilRadius = 12;
         public Vector2 evilGrav = new Vector2(8, 0);
-        public Vector2 evilPos = new Vector2(0, 300);
+        public Vector2 evilPos = new Vector2(0, Random.Integer(300,550));
         public Vector2 evilVelo;
         int evilCount = 0;
 
@@ -21,19 +21,13 @@ namespace MohawkGame2D
         {
             Draw.FillColor = Color.Red;
             Draw.Circle(evilPos, evilRadius);
-        }
-
-        // evil ball physics
-        public void SimulateCircleGrav()
-        {
+        
+            //makes the ball's gravity
             Vector2 horizontalGrav = evilGrav * Time.DeltaTime;
             evilVelo += horizontalGrav;
             evilPos += evilVelo;
-        }
-
-        // what to do if the evil balls spin too far
-        public void evilRotation()
-        {
+       
+            // resets the ball's trajectory and position
             if (evilPos.X > 850)
             {
                 evilPos.X = 0;

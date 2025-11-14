@@ -11,10 +11,11 @@ namespace MohawkGame2D
     {
         public Vector2 projPos = new Vector2(0, 0);
         public Vector2 projVelo;
-        public Vector2 projGravity = new Vector2(0, 3);
+        public Vector2 projGravity = new Vector2(0, 5);
         
         public int projSize = 20;
 
+        // makes the gravity of the projectile
         public void makeGravity()
         {
             Vector2 gravityYay = projGravity * Time.DeltaTime;
