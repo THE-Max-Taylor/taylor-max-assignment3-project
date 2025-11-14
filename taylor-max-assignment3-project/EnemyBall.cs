@@ -10,8 +10,8 @@ namespace MohawkGame2D
 {
     public class EnemyBall
     {
-        public int evilRadius = 12;
-        public Vector2 evilGrav = new Vector2(8, 0);
+        public int evilRadius = 18;
+        public Vector2 evilGrav = new Vector2(3, 0);
         public Vector2 evilPos = new Vector2(0, Random.Integer(300,550));
         public Vector2 evilVelo;
         int evilCount = 0;
@@ -36,7 +36,7 @@ namespace MohawkGame2D
                 evilCount++;
             }
 
-            if (evilCount > 5)
+            if (evilCount > 3)
             {
                 evilGrav.X = -8;
             }
@@ -47,7 +47,7 @@ namespace MohawkGame2D
                 evilCount--;
             }
 
-            if (evilCount < -1)
+            if (evilCount < 0)
             {
                 evilGrav.X = 8;
             }

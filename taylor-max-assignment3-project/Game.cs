@@ -9,8 +9,7 @@ namespace MohawkGame2D
     ///     Your game code goes inside this class!
     /// </summary>
     public class Game
-    {          
-        
+    {                 
         EnemyBall joeBall = new EnemyBall();
 
         Player joePlayer = new Player();
@@ -18,8 +17,6 @@ namespace MohawkGame2D
         Projectiles joeProjectiles = new Projectiles();
 
         TheMother[] manyMothers = new TheMother[50];
-
-        int projSize = 20;
             
         int theCount = 0;
       
@@ -27,14 +24,15 @@ namespace MohawkGame2D
         {
             Window.SetSize(800, 600);
             Window.SetTitle("My Mother Is Proud Of You");
+            Window.TargetFPS = 60;
 
             for (int i = 0; i < manyMothers.Length; i++)
             {
                 manyMothers[i] = new TheMother();
                 manyMothers[i].motherGuy = Random.Vector2(0, 790, 40, 190);
             }
-
         }
+
         public void Update()
         {                     
             Window.ClearBackground(Color.White);
@@ -54,9 +52,17 @@ namespace MohawkGame2D
 
             joeBall.evilBlocks();
 
+            if (Time.SecondsElapsed > 30.0 && theCount < 15)
+            {
+                Window.ClearBackground(Color.Red);
+                Text.Draw($"the SCORE is: {theCount}. and YOU are l o s e :>(", new Vector2(0, 300));
+            }
 
-          
-           
+            if (Time.SecondsElapsed > 30.0 && theCount > 15)
+            {
+                Window.ClearBackground(Color.Blue);
+                Text.Draw($"the SCORE is: {theCount}. my mother Loves: You <3", new Vector2(0, 300));
+            }
             // make player projectiles emerge from player coords
             Vector2 playerPos = new Vector2(joePlayer.playerMove.X, 0);
 
@@ -64,7 +70,7 @@ namespace MohawkGame2D
 
             // check for projectile + enemy overlap
 
-            float theOverlap = projSize + joeBall.evilRadius;
+            float theOverlap = joeProjectiles.projSize + joeBall.evilRadius;
 
             bool isOverlap = Vector2.Distance(joeBall.evilPos, joeProjectiles.projPos) < theOverlap;
 
@@ -77,9 +83,12 @@ namespace MohawkGame2D
                 joeBall.evilPos.X = 0;
 
                 theCount++;            
-            }                      
+            }
 
-            Text.Draw($"The SCORE!! is: {theCount}. My mothers is proud of; you! !", new Vector2(0, 200));
+            if (Time.SecondsElapsed < 30.0)
+            {
+                Text.Draw($"The SCORE!! is: {theCount}. My mothers is proud of; you! !", new Vector2(0, 200));
+            }
         }
     }
 
