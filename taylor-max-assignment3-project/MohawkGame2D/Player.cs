@@ -31,14 +31,10 @@ namespace MohawkGame2D
             {
                 Window.ClearBackground(Color.Red);
                 Console.WriteLine("R E T U R N");
-            }
-           
-        }
+            }         
 
         //makes the player controls!!            
-            public void playerControls()
-            {
-
+           
               float speedYay = 10;
 
               if (Input.IsKeyboardKeyDown(KeyboardInput.D))

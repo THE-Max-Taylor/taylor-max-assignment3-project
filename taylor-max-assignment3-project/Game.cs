@@ -45,7 +45,6 @@ namespace MohawkGame2D
             }
 
             joePlayer.playerCharacter();
-            joePlayer.playerControls();
 
             joeProjectiles.makeGravity();
             joeProjectiles.projectilesYay();
@@ -87,7 +86,7 @@ namespace MohawkGame2D
 
             if (Time.SecondsElapsed < 30.0)
             {
-                Text.Draw($"The SCORE!! is: {theCount}. My mothers is proud of; you! !", new Vector2(0, 200));
+                Text.Draw($"The SCORE!! is:{theCount}. My mothers are proud of; you!!", new Vector2(0, 200));
             }
         }
     }
